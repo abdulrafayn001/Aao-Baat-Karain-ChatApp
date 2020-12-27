@@ -25,13 +25,12 @@
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="285dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginTop="340dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:hint="@string/email"
         android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
-        />
+        android:textColorHint="@android:color/white" />
 
     <EditText
         android:id="@+id/password_login"
@@ -43,8 +42,7 @@
         android:hint="@string/password"
         android:inputType="textPassword"
         android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
-        />
+        android:textColorHint="@android:color/white" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -69,15 +67,14 @@
                 android:textColor="@color/colorFont" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/forgot_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/forgot_password"
-            android:textColor="@color/colorFont"
-            android:textSize="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            />
+    <TextView
+        android:id="@+id/forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="@string/forgot_password"
+        android:textColor="@color/colorFont"
+        android:textSize="20dp" />
 
 </LinearLayout>
