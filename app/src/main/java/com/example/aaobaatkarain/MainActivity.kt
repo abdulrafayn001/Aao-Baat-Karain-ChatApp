@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //Remove the name of the app form Toolbar
-        val toolbar : Toolbar =findViewById(R.id.toolbar_main)
+        val toolbar : Toolbar = findViewById(R.id.toolbar_main)
         setSupportActionBar(toolbar)
         supportActionBar!!.title= ""
 
