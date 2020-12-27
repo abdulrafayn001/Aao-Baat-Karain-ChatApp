@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         val toolbar : Toolbar =findViewById(R.id.toolbar_main)
         setSupportActionBar(toolbar)
         supportActionBar!!.title= ""
-        
+
 
     }
 
