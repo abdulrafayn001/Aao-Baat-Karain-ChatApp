@@ -4,14 +4,22 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(findViewById(R.id.toolbar))
+        setSupportActionBar(findViewById(R.id.toolbar_main))
 
+
+        //Remove the name of the app form Toolbar
+        val toolbar : Toolbar =findViewById(R.id.toolbar_main)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.title= ""
+        
 
     }
 
