@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "380224225966",
+    "firebase_url": "https://aao-baat-karain-default-rtdb.firebaseio.com",
+    "project_id": "aao-baat-karain",
+    "storage_bucket": "aao-baat-karain.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:380224225966:android:b5f3d98237a331ec2ce33f",
+        "android_client_info": {
+          "package_name": "com.example.aaobaatkarain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "380224225966-tq7id32b5l5kp5u4cl3m6qin0ktfb4r1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEcMD7UOABjMZ_q_zadjGgBCcPmfVJNPs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "380224225966-tq7id32b5l5kp5u4cl3m6qin0ktfb4r1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
