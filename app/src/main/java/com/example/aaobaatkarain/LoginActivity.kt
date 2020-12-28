@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -42,8 +43,6 @@ class LoginActivity : AppCompatActivity() {
             }
             else
             {
-                println("--------------------------------------------------------"+email);
-                println("================================================="+pswd);
                 userAuth.signInWithEmailAndPassword(email,pswd)
                         .addOnCompleteListener { task->
                             if(task.isSuccessful)
@@ -66,5 +65,12 @@ class LoginActivity : AppCompatActivity() {
 
     fun userSignup(view: View) {
         startActivity(Intent(this, RegisterActivity::class.java))
+    }
+
+    fun userSignUp(view: View) {
+        startActivity(Intent(this,RegisterActivity::class.java))
+    }
+    fun userLogin(view: View) {
+
     }
 }
