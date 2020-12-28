@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
     android:background="@drawable/login"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
     <TextView
         android:id="@+id/name_app_registe"
         android:layout_width="wrap_content"
@@ -47,22 +45,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center"
-            >
+            android:gravity="center">
+
             <Button
                 android:id="@+id/btn_sign"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_white"
                 android:layout_marginEnd="20dp"
+                android:background="@drawable/button_white"
+                android:onClick="userSignUp"
                 android:text="@string/signup"
                 android:textColor="@color/colorFont" />
+
             <Button
                 android:id="@+id/btn_login"
-                android:layout_marginStart="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:background="@drawable/button_white"
+                android:onClick="userLogin"
                 android:text="@string/login"
                 android:textColor="@color/colorFont" />
         </LinearLayout>
@@ -75,6 +76,6 @@
         android:layout_marginTop="30dp"
         android:text="@string/forgot_password"
         android:textColor="@color/colorFont"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
 </LinearLayout>
