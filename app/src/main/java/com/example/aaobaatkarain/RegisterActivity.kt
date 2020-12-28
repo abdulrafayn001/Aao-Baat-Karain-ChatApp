@@ -1,5 +1,5 @@
 package com.example.aaobaatkarain
-
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -16,12 +16,12 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var userAuth:FirebaseAuth
     private lateinit var userRefernc:DatabaseReference
+    private var FireBaseID:String = ""
 
     private lateinit var UserName:EditText
     private lateinit var Email:EditText
     private lateinit var Password:EditText
     private lateinit var C_Parrword:EditText
-    private var FireBaseID:String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +64,7 @@ class RegisterActivity : AppCompatActivity() {
         }
         else
         {
-               userAuth.createUserWithEmailAndPassword(Email, Password.toString()).addOnCompleteListener {
+               userAuth.createUserWithEmailAndPassword(Email, Pswd).addOnCompleteListener {
                    task->
                    if(task.isSuccessful)
                    {
@@ -77,6 +77,21 @@ class RegisterActivity : AppCompatActivity() {
                        UserMap["profile"] = "https://firebasestorage.googleapis.com/v0/b/aao-baat-karain.appspot.com/o/PlaceHolder.png?alt=media&token=9c73c7e0-10e6-4040-9852-45f68073cb27"
                        UserMap["status"] = "offline"
                        UserMap["search"] = User.toLowerCase(Locale.ROOT)
+                       userRefernc.updateChildren(UserMap)
+                               .addOnCompleteListener { task->
+                                   if(task.isSuccessful)
+                                   {
+                                       Toast.makeText(this,"Registered Sucessfully!",Toast.LENGTH_LONG).show()
+                                       val intent = Intent(this,LoginActivity::class.java)
+                                       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                                       startActivity(intent)
+                                       finish()
+                                   }
+                                   else
+                                   {
+                                       Toast.makeText(this,"Error Occured Try Again Later!",Toast.LENGTH_LONG).show()
+                                   }
+                               }
                    }
                    else
                    {
