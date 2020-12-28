@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                 {
                     val user: Users?=snapshot.getValue(Users::class.java)
                     findViewById<TextView>(R.id.user_name).text= user!!.getUsername()
-                    Picasso.get().load(user.getProfile()).into(findViewById<ImageView>(R.id.profile_img))
+                    Picasso.get().load(user.getProfile()).placeholder(R.drawable.ic_profile).into(findViewById<ImageView>(R.id.profile_img))
                 }
             }
 
