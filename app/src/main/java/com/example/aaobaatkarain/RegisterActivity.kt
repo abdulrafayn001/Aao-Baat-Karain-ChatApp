@@ -6,12 +6,9 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.core.utilities.Utilities
-import com.google.firebase.installations.Utils
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -65,6 +62,11 @@ class RegisterActivity : AppCompatActivity() {
         {
             PrintError("Confirm Password Can't be Empty")
         }
+        else
+            if(c_pswd!=pswd)
+            {
+                PrintError("Password does not match")
+            }
         else
         {
             if(validateEmail(email) && validatePassword(pswd))
