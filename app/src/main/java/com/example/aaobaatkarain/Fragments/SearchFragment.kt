@@ -60,7 +60,31 @@ class SearchFragment : Fragment() {
                         (mUsers as ArrayList<Users>).add(usr)
                     }
                 }
-                userAdapter=UserAdapter(context!!,mUsers!!,false)
+                userAdapter= UserAdapter(context!!,mUsers!!,false)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
+
+    }
+    private fun searchUser(find:String){
+        val firebaseUserID=FirebaseAuth.getInstance().currentUser!!.uid
+        val queryUsers= FirebaseDatabase.getInstance().reference.child("Users").orderByChild("search").startAt(find).endAt(find+"\uf8ff")
+
+        queryUsers.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                (mUsers as ArrayList<Users>).clear()
+                for(i in snapshot.children)
+                {
+                    val usr:Users?=snapshot.getValue(Users::class.java)
+                    if(usr!!.getUid() != firebaseUserID)
+                    {
+                        (mUsers as ArrayList<Users>).add(usr)
+                    }
+                }
+                userAdapter= UserAdapter(context!!,mUsers!!,false)
             }
 
             override fun onCancelled(error: DatabaseError) {
