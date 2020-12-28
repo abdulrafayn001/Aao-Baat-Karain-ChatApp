@@ -28,20 +28,21 @@ class SearchFragment : Fragment() {
     private var userAdapter:UserAdapter?=null
     private var mUsers:List<Users>?=null
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+//
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         val view:View=inflater.inflate(R.layout.fragment_search, container, false)
         mUsers=ArrayList()
         retrieveAllUsers()
+
         return view
     }
 
@@ -88,7 +89,7 @@ class SearchFragment : Fragment() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+
             }
 
         })
