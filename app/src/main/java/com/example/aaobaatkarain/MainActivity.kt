@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -13,10 +15,18 @@ import androidx.viewpager.widget.ViewPager
 import com.example.aaobaatkarain.Fragments.ChatFragment
 import com.example.aaobaatkarain.Fragments.SearchFragment
 import com.example.aaobaatkarain.Fragments.SettingsFragment
+import com.example.aaobaatkarain.ModelClasses.Users
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.*
+import com.squareup.picasso.Picasso
 
 
 class MainActivity : AppCompatActivity() {
+
+    var refUsers:DatabaseReference?=null
+    var firebaseUser:FirebaseUser?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +34,8 @@ class MainActivity : AppCompatActivity() {
 
 //        setSupportActionBar(findViewById(R.id.toolbar_main))
 
+        firebaseUser=FirebaseAuth.getInstance().currentUser
+        refUsers=FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
 
         //Remove the name of the app form Toolbar
         val toolbar : Toolbar = findViewById(R.id.toolbar_main)
@@ -39,6 +51,24 @@ class MainActivity : AppCompatActivity() {
 
         viewPager.adapter=viewPagerAdapter
         tabLayout.setupWithViewPager(viewPager)
+
+
+        //Displaying username and profile picture in main activity
+        refUsers!!.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists())
+                {
+                    val user: Users?=snapshot.getValue(Users::class.java)
+                    findViewById<TextView>(R.id.user_name).text= user!!.getUsername()
+                    Picasso.get().load(user.getProfile()).into(findViewById<ImageView>(R.id.profile_img))
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
