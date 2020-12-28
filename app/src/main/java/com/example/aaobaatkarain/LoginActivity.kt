@@ -12,7 +12,6 @@ import com.google.firebase.auth.FirebaseUser
 
 class LoginActivity : AppCompatActivity() {
 
-    private var fbUser:FirebaseUser? = null
     private lateinit var userAuth:FirebaseAuth
 
     private lateinit var Email:EditText
@@ -49,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
                         .addOnCompleteListener { task->
                             if(task.isSuccessful)
                             {
-                                Toast.makeText(this,"Login Sucessfull", Toast.LENGTH_LONG).show()
+                                Toast.makeText(this,"Login Successfull", Toast.LENGTH_LONG).show()
                                 startActivity(Intent(this,MainActivity::class.java))
                                 finish()
                             }
