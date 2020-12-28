@@ -8,29 +8,31 @@
     android:orientation="vertical"
     android:background="@drawable/register"
     >
+
     <TextView
         android:id="@+id/name_app_registe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="90dp"
         android:text="@string/app_name_urdu"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textColor="@color/colorFont"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:layout_marginTop="90dp"
-        />
+        android:textStyle="bold" />
+
     <EditText
         android:id="@+id/username_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="250dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="300dp"
         android:hint="@string/username"
         android:inputType="text"
         android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"/>
+        android:textColorHint="@android:color/white" />
+
     <EditText
         android:id="@+id/email_register"
         android:layout_width="match_parent"
@@ -47,22 +49,34 @@
         android:id="@+id/password_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
         android:hint="Password"
         android:inputType="textPassword"
         android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
-         />
+        android:textColorHint="@android:color/white" />
+
+    <EditText
+        android:id="@+id/password_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="25dp"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white" />
+
     <Button
         android:id="@+id/btn_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/button_white"
-        android:text="SignUp"
-        android:textColor="@color/colorFont"
         android:layout_gravity="center"
-        />
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/button_white"
+        android:onClick="userSignup"
+        android:text="SignUp"
+        android:textColor="@color/colorFont" />
 </LinearLayout>
