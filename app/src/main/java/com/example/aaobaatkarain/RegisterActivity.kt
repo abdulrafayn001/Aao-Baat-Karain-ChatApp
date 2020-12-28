@@ -9,6 +9,8 @@ import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.util.*
+import kotlin.collections.HashMap
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -71,15 +73,10 @@ class RegisterActivity : AppCompatActivity() {
 
                        val UserMap = HashMap<String,Any>()
                        UserMap["uid"] = FireBaseID
-                       UserMap["username"] = UserName
+                       UserMap["username"] = User
                        UserMap["profile"] = "https://firebasestorage.googleapis.com/v0/b/aao-baat-karain.appspot.com/o/PlaceHolder.png?alt=media&token=9c73c7e0-10e6-4040-9852-45f68073cb27"
-                       UserMap["username"] = UserName
-                       UserMap["username"] = UserName
-                       UserMap["username"] = UserName
-                       UserMap["username"] = UserName
-                       UserMap["username"] = UserName
-                       UserMap["username"] = UserName
-
+                       UserMap["status"] = "offline"
+                       UserMap["search"] = User.toLowerCase(Locale.ROOT)
                    }
                    else
                    {
