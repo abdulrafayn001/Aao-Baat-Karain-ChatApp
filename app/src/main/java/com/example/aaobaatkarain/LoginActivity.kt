@@ -2,6 +2,7 @@ package com.example.aaobaatkarain
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -24,4 +25,12 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    fun userSignup(view: View) {
+        startActivity(Intent(this,RegisterActivity::class.java))
+    }
+    fun userLogin(view: View) {
+
+    }
+
 }
