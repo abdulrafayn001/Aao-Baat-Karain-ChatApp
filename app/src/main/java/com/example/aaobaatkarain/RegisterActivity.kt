@@ -8,17 +8,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var userAuth:FirebaseAuth
     private lateinit var userRefernc:DatabaseReference
 
-    private lateinit var UserName:EditText;
-    private lateinit var Email:EditText;
-    private lateinit var Password:EditText;
-    private lateinit var C_Parrword:EditText;
-
+    private lateinit var UserName:EditText
+    private lateinit var Email:EditText
+    private lateinit var Password:EditText
+    private lateinit var C_Parrword:EditText
+    private var FireBaseID:String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +62,30 @@ class RegisterActivity : AppCompatActivity() {
         }
         else
         {
-            
+               userAuth.createUserWithEmailAndPassword(Email, Password.toString()).addOnCompleteListener {
+                   task->
+                   if(task.isSuccessful)
+                   {
+                       FireBaseID = userAuth.currentUser!!.uid
+                       userRefernc = FirebaseDatabase.getInstance().reference.child("Users").child(FireBaseID)
+
+                       val UserMap = HashMap<String,Any>()
+                       UserMap["uid"] = FireBaseID
+                       UserMap["username"] = UserName
+                       UserMap["profile"] = "https://firebasestorage.googleapis.com/v0/b/aao-baat-karain.appspot.com/o/PlaceHolder.png?alt=media&token=9c73c7e0-10e6-4040-9852-45f68073cb27"
+                       UserMap["username"] = UserName
+                       UserMap["username"] = UserName
+                       UserMap["username"] = UserName
+                       UserMap["username"] = UserName
+                       UserMap["username"] = UserName
+                       UserMap["username"] = UserName
+
+                   }
+                   else
+                   {
+                       Toast.makeText(this,"Error Occured Try Again Later!",Toast.LENGTH_LONG).show()
+                   }
+               }
         }
     }
 }
