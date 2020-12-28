@@ -46,14 +46,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center">
-          
+
             <Button
                 android:id="@+id/btn_sign"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/button_white"
-                android:onClick="userSignup"
+                android:onClick="userSignUp"
                 android:text="@string/signup"
                 android:textColor="@color/colorFont" />
 
