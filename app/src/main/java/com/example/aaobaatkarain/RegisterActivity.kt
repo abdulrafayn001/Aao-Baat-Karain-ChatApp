@@ -81,6 +81,10 @@ class RegisterActivity : AppCompatActivity() {
                         UserMap["uid"] = FireBaseID
                         UserMap["username"] = user
                         UserMap["profile"] = "https://firebasestorage.googleapis.com/v0/b/aao-baat-karain.appspot.com/o/PlaceHolder.png?alt=media&token=9c73c7e0-10e6-4040-9852-45f68073cb27"
+                        UserMap["cover"] = "https://firebasestorage.googleapis.com/v0/b/aao-baat-karain.appspot.com/o/cover.jpg?alt=media&token=ca58ac4d-e0e1-48d1-924e-25ba2c22e12e"
+                        UserMap["facebook"] = "www.facebook.com"
+                        UserMap["instagram"] = "www.instagram.com"
+                        UserMap["website"] = "www.google.com"
                         UserMap["status"] = "offline"
                         UserMap["search"] = user.toLowerCase(Locale.ROOT)
                         userRefernc.updateChildren(UserMap).addOnCompleteListener { task ->
