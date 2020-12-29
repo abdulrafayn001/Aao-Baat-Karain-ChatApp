@@ -1,6 +1,5 @@
 package com.example.aaobaatkarain.AdapterClasses
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +22,7 @@ class UserAdapter (context: Context,users:List<Users>,isChatChecked:Boolean): Re
         this.isChatChecked=isChatChecked
         this.users=users
     }
-    @SuppressLint("CutPasteId")
+
     class ViewHolder(view: View):RecyclerView.ViewHolder(view){
         lateinit var userNameText:TextView
         lateinit var profileImageView:CircleImageView
@@ -41,14 +40,14 @@ class UserAdapter (context: Context,users:List<Users>,isChatChecked:Boolean): Re
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val adapterLayout = LayoutInflater.from(parent.context)
-                .inflate(R.layout.search_item_layout, parent, false)
-        return ViewHolder(adapterLayout)
+        val view:View=LayoutInflater.from(context).inflate(R.layout.search_item_layout,parent,false)
+        return UserAdapter.ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = users[position]
-
+        for(i in this.users)
+            println(i)
         holder.userNameText.text= item.getUsername()
         Picasso.get().load(item.getProfile()).placeholder(R.drawable.ic_profile).into(holder.profileImageView)
         
