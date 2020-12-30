@@ -3,24 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="30dp"
     tools:context=".Fragments.SettingsFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="1dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/cover_image"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                android:src="@drawable/cover" />
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_image"
                 android:layout_width="150dp"
@@ -28,28 +29,69 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="140dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/placeholder" >
+                android:src="@drawable/placeholder">
 
             </de.hdodenhof.circleimageview.CircleImageView>
+
+            <TextView
+                android:id="@+id/usernameProf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_image"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/username"
+                android:textSize="35sp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cv1"
+        android:layout_margin="30dp"
+        android:background="@drawable/overlayer"
         android:gravity="center"
-        android:background="@color/colorPrimary"
-        android:layout_marginTop="40dp"
-        android:padding="6dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="6dp">
+
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:id="@+id/set_fb"/>
+            android:id="@+id/set_fb"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="3dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/facebook" />
 
+        <ImageView
+            android:id="@+id/set_insta"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="3dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/instagram" />
 
+        <ImageView
+            android:id="@+id/set_web"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginBottom="3dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/internet" />
     </LinearLayout>
 
 </RelativeLayout>

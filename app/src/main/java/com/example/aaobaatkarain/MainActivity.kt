@@ -1,6 +1,7 @@
 package com.example.aaobaatkarain
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -85,6 +86,11 @@ class MainActivity : AppCompatActivity() {
         {
             R.id.logout ->
             {
+                val data: SharedPreferences = getSharedPreferences("LOG", MODE_PRIVATE)
+                val gedit = data.edit()
+                gedit.putBoolean("LogSucess",false)
+                gedit.apply()
+                gedit.commit()
                 val intent = Intent(this,LoginActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)

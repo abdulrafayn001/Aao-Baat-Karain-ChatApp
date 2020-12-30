@@ -1,4 +1,5 @@
 package com.example.aaobaatkarain
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
@@ -71,9 +72,16 @@ class RegisterActivity : AppCompatActivity() {
         {
             if(validateEmail(email) && validatePassword(pswd))
             {
+                val waitingBar: ProgressDialog = ProgressDialog(this)
+                waitingBar.setMessage("Registering your account. Please Wait!")
+                waitingBar.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+                waitingBar.setTitle("Register")
+                waitingBar.progress = 1
+                waitingBar.show()
                 userAuth.createUserWithEmailAndPassword(email, pswd).addOnCompleteListener { task ->
                     if (task.isSuccessful)
                     {
+                        waitingBar.progress = 0
                         FireBaseID = userAuth.currentUser!!.uid
                         userRefernc = FirebaseDatabase.getInstance().reference.child("Users").child(FireBaseID)
 
@@ -91,8 +99,7 @@ class RegisterActivity : AppCompatActivity() {
                             if (task.isSuccessful)
                             {
                                 PrintError("Registered Successfully!")
-                                val intent = Intent(this, LoginActivity::class.java)
-                                startActivity(intent)
+                                startActivity(Intent(this, LoginActivity::class.java))
                                 finish()
                             }
                             else
@@ -131,16 +138,16 @@ class RegisterActivity : AppCompatActivity() {
         if(password.contains(" "))
         {
             PrintError("Password Should not contain spaces. Try Again!")
-            return false;
+            return false
         }
         else if(password.length < 8)
         {
             PrintError("Password Should have minimum length of 8 Characters. Try Again!")
-            return false;
+            return false
         }
         else
         {
-           return true;
+           return true
         }
     }
     private fun PrintError(v:String)
