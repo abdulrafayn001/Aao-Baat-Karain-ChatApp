@@ -28,13 +28,13 @@ class MainActivity : AppCompatActivity() {
 
     var refUsers:DatabaseReference?=null
     var firebaseUser:FirebaseUser?=null
+    var userAuth:FirebaseAuth?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        
-//        setSupportActionBar(findViewById(R.id.toolbar_main))
 
+        userAuth = FirebaseAuth.getInstance()
         firebaseUser=FirebaseAuth.getInstance().currentUser
         refUsers=FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
 
@@ -86,6 +86,7 @@ class MainActivity : AppCompatActivity() {
         {
             R.id.logout ->
             {
+                userAuth?.signOut()
                 val data: SharedPreferences = getSharedPreferences("LOG", MODE_PRIVATE)
                 val gedit = data.edit()
                 gedit.putBoolean("LogSucess",false)

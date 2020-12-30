@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.DialogInterface
+import android.content.DialogInterface.OnShowListener
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -41,7 +42,7 @@ class SettingsFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View?
+                              savedInstanceState: Bundle?): View?
     {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
@@ -52,14 +53,12 @@ class SettingsFragment : Fragment() {
                 .child(firebaseUser!!.uid)
         storageRef = FirebaseStorage.getInstance().reference.child("UserImages")
 
-        userRef!!.addValueEventListener(object : ValueEventListener{
+        userRef!!.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists())
-                {
-                    val user:Users? = snapshot.getValue(Users::class.java)
+                if (snapshot.exists()) {
+                    val user: Users? = snapshot.getValue(Users::class.java)
                     view.findViewById<TextView>(R.id.usernameProf).text = user!!.getUsername()
-                    if(context!=null)
-                    {
+                    if (context != null) {
                         Picasso.get()
                                 .load(user.getCover())
                                 .into(view.findViewById<ImageView>(R.id.cover_image))
@@ -80,7 +79,7 @@ class SettingsFragment : Fragment() {
             val builder = AlertDialog.Builder(context)
             builder.setTitle("Change Profile Picture")
             builder.setMessage("Are You Sure You Want to Change Your Profile Picture ?")
-            builder.setPositiveButton("YES"){dialog, which ->
+            builder.setPositiveButton("YES"){ dialog, which ->
                 isCover = false
                 changeImage()
             }
@@ -93,7 +92,7 @@ class SettingsFragment : Fragment() {
             val builder = AlertDialog.Builder(context)
             builder.setTitle("Change Cover Picture")
             builder.setMessage("Are You Sure You Want to Change Your Cover Picture ?")
-            builder.setPositiveButton("YES"){dialog, which ->
+            builder.setPositiveButton("YES"){ dialog, which ->
                 isCover = true
                 changeImage()
             }
@@ -106,10 +105,9 @@ class SettingsFragment : Fragment() {
             val builder = AlertDialog.Builder(context)
             builder.setTitle("Change Facebook link")
             builder.setMessage("Are You Sure You Want to Change Your Facebook link?")
-            builder.setPositiveButton("YES"){dialog, which ->
+            builder.setPositiveButton("YES"){ dialog, which ->
                 socialLink = "fb"
                 setSocialLinks()
-
             }
             builder.setNeutralButton("Cancel"){ dialogInterface: DialogInterface, i: Int -> }
             val dialog: AlertDialog = builder.create()
@@ -120,7 +118,7 @@ class SettingsFragment : Fragment() {
             val builder = AlertDialog.Builder(context)
             builder.setTitle("Change Instagram Link")
             builder.setMessage("Are You Sure You Want to Change Your instagram link?")
-            builder.setPositiveButton("YES"){dialog, which ->
+            builder.setPositiveButton("YES"){ dialog, which ->
                 socialLink = "insta"
                 setSocialLinks()
 
@@ -134,7 +132,7 @@ class SettingsFragment : Fragment() {
             val builder = AlertDialog.Builder(context)
             builder.setTitle("Change Website Link")
             builder.setMessage("Are You Sure You Want to Change Your Website link?")
-            builder.setPositiveButton("YES"){dialog, which ->
+            builder.setPositiveButton("YES"){ dialog, which ->
                 socialLink = "web"
                 setSocialLinks()
 
@@ -147,7 +145,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setSocialLinks() {
-        val builder = AlertDialog.Builder(context,R.style.Theme_AppCompat_DayNight_Dialog_Alert)
+        val builder = AlertDialog.Builder(context, R.style.MyAlertDialogStyle)
 
         if(socialLink == "fb")
         {
@@ -166,23 +164,23 @@ class SettingsFragment : Fragment() {
 
         if(socialLink == "fb")
         {
-            inputField.hint = "USERNAME of Facebook"
+            inputField.hint = "   Username of Facebook"
         }
         else if(socialLink == "insta")
         {
-            inputField.hint = "USERNAME of Instagram"
+            inputField.hint = "   Username of Instagram"
         }
         else if(socialLink == "web")
         {
-            inputField.hint = "e.g, www.google.com"
+            inputField.hint = "   e.g, www.google.com"
         }
         builder.setView(inputField)
-        builder.setPositiveButton("Save Changes"){dialog, which ->
+        builder.setPositiveButton("Save Changes"){ dialog, which ->
 
             val input:String = inputField.text.toString()
             if(input == "")
             {
-                Toast.makeText(context,"Link Can't be Empty",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Link Can't be Empty", Toast.LENGTH_SHORT).show()
             }
             else
             {
@@ -192,37 +190,38 @@ class SettingsFragment : Fragment() {
         }
         builder.setNeutralButton("Cancel"){ dialogInterface: DialogInterface, i: Int -> }
         val dialog: AlertDialog = builder.create()
+        dialog.setOnShowListener(OnShowListener
+        {
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(1)
+        })
+
         dialog.show()
 
 
     }
 
     private fun saveSocialInDatabase(input: String) {
-        val Links = HashMap<String,Any>()
+        val Links = HashMap<String, Any>()
         when(socialLink)
         {
-            "fb"->
-            {
+            "fb" -> {
                 Links["facebook"] = "https://www.facebook.com/$input"
             }
-            "insta"->
-            {
+            "insta" -> {
                 Links["instagram"] = "https://www.instagram.com/$input"
             }
-            "web"->
-            {
+            "web" -> {
                 Links["website"] = "https://$input"
             }
         }
-        userRef!!.updateChildren(Links).addOnCompleteListener {
-            task->
+        userRef!!.updateChildren(Links).addOnCompleteListener { task->
             if(task.isSuccessful)
             {
-                Toast.makeText (context,"Links Updated Successfully",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Links Updated Successfully", Toast.LENGTH_SHORT).show()
             }
             else
             {
-                Toast.makeText (context,"UnSuccessfull ! Try Again Later",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "UnSuccessfull ! Try Again Later", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -231,7 +230,7 @@ class SettingsFragment : Fragment() {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(intent,ReqCode)
+        startActivityForResult(intent, ReqCode)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -241,7 +240,7 @@ class SettingsFragment : Fragment() {
                 resultCode == Activity.RESULT_OK && data!!.data!=null)
         {
             imageAddress = data.data
-            Toast.makeText (context,"Uploading Image",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Uploading Image", Toast.LENGTH_SHORT).show()
             uploadImageFirebase()
         }
     }
@@ -254,14 +253,13 @@ class SettingsFragment : Fragment() {
 
         if(imageAddress!=null)
         {
-            val fileRef = storageRef?.child(System.currentTimeMillis().toString()+".jpg")
+            val fileRef = storageRef?.child(System.currentTimeMillis().toString() + ".jpg")
             val uploadTask:StorageTask<*>
             if (fileRef != null)
             {
                 uploadTask = fileRef.putFile(imageAddress!!)
-                uploadTask.continueWithTask(Continuation <UploadTask.TaskSnapshot, Task<Uri>>{ task->
-                    if(!task.isSuccessful)
-                    {
+                uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                    if (!task.isSuccessful) {
                         task.exception?.let {
                             throw it
                         }
@@ -275,14 +273,14 @@ class SettingsFragment : Fragment() {
 
                         if(isCover)
                         {
-                            val mapCover = HashMap<String,Any>()
+                            val mapCover = HashMap<String, Any>()
                             mapCover["cover"] = Url
                             userRef!!.updateChildren(mapCover)
                             isCover = false
                         }
                         else
                         {
-                            val mapProfile = HashMap<String,Any>()
+                            val mapProfile = HashMap<String, Any>()
                             mapProfile["profile"] = Url
                             userRef!!.updateChildren(mapProfile)
                         }
