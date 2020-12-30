@@ -73,11 +73,11 @@ class SettingsFragment : Fragment() {
         })
 
         view.findViewById<ImageView>(R.id.profile_image).setOnClickListener {
-            isCover = true
+            isCover = false
             changeImage()
         }
         view.findViewById<ImageView>(R.id.cover_image).setOnClickListener {
-            isCover = false
+            isCover = true
             changeImage()
         }
 

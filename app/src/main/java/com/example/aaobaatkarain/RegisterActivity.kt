@@ -80,7 +80,6 @@ class RegisterActivity : AppCompatActivity() {
                 userAuth.createUserWithEmailAndPassword(email, pswd).addOnCompleteListener { task ->
                     if (task.isSuccessful)
                     {
-                        waitingBar.dismiss()
                         FireBaseID = userAuth.currentUser!!.uid
                         userRefernc = FirebaseDatabase.getInstance().reference.child("Users").child(FireBaseID)
 
@@ -97,12 +96,14 @@ class RegisterActivity : AppCompatActivity() {
                         userRefernc.updateChildren(UserMap).addOnCompleteListener { task ->
                             if (task.isSuccessful)
                             {
+                                waitingBar.dismiss()
                                 PrintError("Registered Successfully!")
                                 startActivity(Intent(this, LoginActivity::class.java))
                                 finish()
                             }
                             else
                             {
+                                waitingBar.dismiss()
                                 PrintError("Error Occurred! Try Again Later!")
                             }
                         }
