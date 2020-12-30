@@ -23,15 +23,10 @@ import kotlin.collections.ArrayList
 
 
 class SearchFragment : Fragment() {
-    private var userAdapter:UserAdapter?=null
+
     private var mUsers:List<Users>?=null
     private var recyclerView: RecyclerView?=null
     private var searchEditText: EditText?=null
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +38,7 @@ class SearchFragment : Fragment() {
         retrieveAllUsers()
 
         recyclerView=view.findViewById(R.id.search_list_view)
-//        recyclerView!!.setHasFixedSize(true)
+        recyclerView!!.setHasFixedSize(true)
         recyclerView!!.layoutManager= LinearLayoutManager(context)
 
         searchEditText=view.findViewById(R.id.searchUserET)
@@ -53,7 +48,8 @@ class SearchFragment : Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                searchUser(s.toString().toLowerCase(Locale.ROOT))
+
+                    searchUser(s.toString().toLowerCase(Locale.ROOT))
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -90,6 +86,7 @@ class SearchFragment : Fragment() {
 
                     // Use this setting to improve performance if you know that changes
                     // in content do not change the layout size of the RecyclerView
+
                     recyclerView!!.setHasFixedSize(true)
                 }
             }
@@ -100,27 +97,26 @@ class SearchFragment : Fragment() {
         })
 
     }
-    private fun searchUser(find:String){
+    private fun searchUser(find:String)
+    {
         val firebaseUserID=FirebaseAuth.getInstance().currentUser!!.uid
         val queryUsers= FirebaseDatabase.getInstance().reference.child("Users").orderByChild("search").startAt(find).endAt(find+"\uf8ff")
 
         queryUsers.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 (mUsers as ArrayList<Users>).clear()
-                for(s in snapshot.children)
-                {
-                    val usr:Users?=s.getValue(Users::class.java)
-                    if(usr!!.getUid() != firebaseUserID)
-                    {
+                for (s in snapshot.children) {
+                    val usr: Users? = s.getValue(Users::class.java)
+                    if (usr!!.getUid() != firebaseUserID) {
                         (mUsers as ArrayList<Users>).add(usr)
                     }
                 }
 
-                recyclerView!!.adapter = UserAdapter(context!!, mUsers!!,false)
+                    recyclerView!!.adapter = UserAdapter(context!!, mUsers!!,false)
 
-                // Use this setting to improve performance if you know that changes
-                // in content do not change the layout size of the RecyclerView
-                recyclerView!!.setHasFixedSize(true)
+                    // Use this setting to improve performance if you know that changes
+                    // in content do not change the layout size of the RecyclerView
+                    recyclerView!!.setHasFixedSize(true)
             }
 
             override fun onCancelled(error: DatabaseError) {

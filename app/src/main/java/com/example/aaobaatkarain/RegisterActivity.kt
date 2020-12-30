@@ -1,4 +1,5 @@
 package com.example.aaobaatkarain
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
@@ -71,6 +72,11 @@ class RegisterActivity : AppCompatActivity() {
         {
             if(validateEmail(email) && validatePassword(pswd))
             {
+                val waitingBar: ProgressDialog = ProgressDialog(this)
+                waitingBar.setMessage("Registering your account. Please Wait!")
+                waitingBar.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+                waitingBar.setTitle("Register")
+                waitingBar.show()
                 userAuth.createUserWithEmailAndPassword(email, pswd).addOnCompleteListener { task ->
                     if (task.isSuccessful)
                     {
@@ -81,18 +87,23 @@ class RegisterActivity : AppCompatActivity() {
                         UserMap["uid"] = FireBaseID
                         UserMap["username"] = user
                         UserMap["profile"] = "https://firebasestorage.googleapis.com/v0/b/aao-baat-karain.appspot.com/o/PlaceHolder.png?alt=media&token=9c73c7e0-10e6-4040-9852-45f68073cb27"
+                        UserMap["cover"] = "https://firebasestorage.googleapis.com/v0/b/aao-baat-karain.appspot.com/o/cover.jpg?alt=media&token=ca58ac4d-e0e1-48d1-924e-25ba2c22e12e"
+                        UserMap["facebook"] = "www.facebook.com"
+                        UserMap["instagram"] = "www.instagram.com"
+                        UserMap["website"] = "www.google.com"
                         UserMap["status"] = "offline"
                         UserMap["search"] = user.toLowerCase(Locale.ROOT)
                         userRefernc.updateChildren(UserMap).addOnCompleteListener { task ->
                             if (task.isSuccessful)
                             {
+                                waitingBar.dismiss()
                                 PrintError("Registered Successfully!")
-                                val intent = Intent(this, LoginActivity::class.java)
-                                startActivity(intent)
+                                startActivity(Intent(this, LoginActivity::class.java))
                                 finish()
                             }
                             else
                             {
+                                waitingBar.dismiss()
                                 PrintError("Error Occurred! Try Again Later!")
                             }
                         }
@@ -127,16 +138,16 @@ class RegisterActivity : AppCompatActivity() {
         if(password.contains(" "))
         {
             PrintError("Password Should not contain spaces. Try Again!")
-            return false;
+            return false
         }
         else if(password.length < 8)
         {
             PrintError("Password Should have minimum length of 8 Characters. Try Again!")
-            return false;
+            return false
         }
         else
         {
-           return true;
+           return true
         }
     }
     private fun PrintError(v:String)

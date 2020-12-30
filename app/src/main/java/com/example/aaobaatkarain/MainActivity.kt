@@ -1,6 +1,7 @@
 package com.example.aaobaatkarain
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -27,13 +28,13 @@ class MainActivity : AppCompatActivity() {
 
     var refUsers:DatabaseReference?=null
     var firebaseUser:FirebaseUser?=null
+    var userAuth:FirebaseAuth?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        
-//        setSupportActionBar(findViewById(R.id.toolbar_main))
 
+        userAuth = FirebaseAuth.getInstance()
         firebaseUser=FirebaseAuth.getInstance().currentUser
         refUsers=FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
 
@@ -85,6 +86,12 @@ class MainActivity : AppCompatActivity() {
         {
             R.id.logout ->
             {
+                userAuth?.signOut()
+                val data: SharedPreferences = getSharedPreferences("LOG", MODE_PRIVATE)
+                val gedit = data.edit()
+                gedit.putBoolean("LogSucess",false)
+                gedit.apply()
+                gedit.commit()
                 val intent = Intent(this,LoginActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
