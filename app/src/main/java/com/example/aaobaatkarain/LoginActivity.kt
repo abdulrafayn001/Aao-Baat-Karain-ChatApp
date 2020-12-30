@@ -61,7 +61,6 @@ class LoginActivity : AppCompatActivity() {
                 waitingBar.setMessage("Signing in Please Wait!")
                 waitingBar.setProgressStyle(ProgressDialog.STYLE_SPINNER)
                 waitingBar.setTitle("Sign In")
-                waitingBar.progress = 1
                 waitingBar.show()
 
 
@@ -69,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
                         .addOnCompleteListener { task->
                             if(task.isSuccessful)
                             {
-                                waitingBar.progress = 0
+                                waitingBar.dismiss()
                                 Toast.makeText(this,"Login Successfull", Toast.LENGTH_LONG).show()
                                 gedit.putBoolean("LogSucess",true)
                                 gedit.apply()

@@ -76,12 +76,11 @@ class RegisterActivity : AppCompatActivity() {
                 waitingBar.setMessage("Registering your account. Please Wait!")
                 waitingBar.setProgressStyle(ProgressDialog.STYLE_SPINNER)
                 waitingBar.setTitle("Register")
-                waitingBar.progress = 1
                 waitingBar.show()
                 userAuth.createUserWithEmailAndPassword(email, pswd).addOnCompleteListener { task ->
                     if (task.isSuccessful)
                     {
-                        waitingBar.progress = 0
+                        waitingBar.dismiss()
                         FireBaseID = userAuth.currentUser!!.uid
                         userRefernc = FirebaseDatabase.getInstance().reference.child("Users").child(FireBaseID)
 

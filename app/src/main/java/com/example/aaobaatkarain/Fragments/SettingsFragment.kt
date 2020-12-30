@@ -33,7 +33,7 @@ class SettingsFragment : Fragment() {
     private val ReqCode = 898
     private var imageAddress:Uri? = null
     private var storageRef:StorageReference? = null
-    private var PicType:String? = null
+    private var isCover:Boolean = false
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -73,7 +73,11 @@ class SettingsFragment : Fragment() {
         })
 
         view.findViewById<ImageView>(R.id.profile_image).setOnClickListener {
-            PicType = "cover"
+            isCover = true
+            changeImage()
+        }
+        view.findViewById<ImageView>(R.id.cover_image).setOnClickListener {
+            isCover = false
             changeImage()
         }
 
@@ -127,18 +131,20 @@ class SettingsFragment : Fragment() {
                         val downloadUrl = task.result
                         val Url = downloadUrl.toString()
 
-                        if(PicType == "cover")
+                        if(isCover)
                         {
                             val mapCover = HashMap<String,Any>()
                             mapCover["cover"] = Url
                             userRef!!.updateChildren(mapCover)
+                            isCover = false
                         }
                         else
                         {
                             val mapProfile = HashMap<String,Any>()
-                            mapProfile["cover"] = Url
+                            mapProfile["profile"] = Url
                             userRef!!.updateChildren(mapProfile)
                         }
+                        progress.dismiss()
                     }
                 }
             }
