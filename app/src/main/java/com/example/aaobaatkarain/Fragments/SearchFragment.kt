@@ -28,6 +28,13 @@ class SearchFragment : Fragment() {
     private var recyclerView: RecyclerView?=null
     private var searchEditText: EditText?=null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,11 +42,11 @@ class SearchFragment : Fragment() {
         // Inflate the layout for this fragment
         val view:View=inflater.inflate(R.layout.fragment_search, container, false)
         mUsers=ArrayList()
-        retrieveAllUsers()
-
         recyclerView=view.findViewById(R.id.search_list_view)
         recyclerView!!.setHasFixedSize(true)
         recyclerView!!.layoutManager= LinearLayoutManager(context)
+        recyclerView!!.adapter = context?.let { UserAdapter(it, mUsers!!,false) }
+        retrieveAllUsers()
 
         searchEditText=view.findViewById(R.id.searchUserET)
         searchEditText!! .addTextChangedListener(object : TextWatcher{
@@ -81,7 +88,6 @@ class SearchFragment : Fragment() {
                             (mUsers as ArrayList<Users>).add(usr)
                         }
                     }
-
                     recyclerView!!.adapter = UserAdapter(context!!, mUsers!!,false)
 
                     // Use this setting to improve performance if you know that changes
@@ -113,10 +119,6 @@ class SearchFragment : Fragment() {
                 }
 
                     recyclerView!!.adapter = UserAdapter(context!!, mUsers!!,false)
-
-                    // Use this setting to improve performance if you know that changes
-                    // in content do not change the layout size of the RecyclerView
-                    recyclerView!!.setHasFixedSize(true)
             }
 
             override fun onCancelled(error: DatabaseError) {

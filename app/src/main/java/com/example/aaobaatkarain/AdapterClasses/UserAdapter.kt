@@ -41,16 +41,13 @@ class UserAdapter (context: Context,users:List<Users>,isChatChecked:Boolean): Re
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view:View=LayoutInflater.from(context).inflate(R.layout.search_item_layout,parent,false)
-        return UserAdapter.ViewHolder(view)
+        return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = users[position]
-        for(i in this.users)
-            println(i)
         holder.userNameText.text= item.getUsername()
         Picasso.get().load(item.getProfile()).placeholder(R.drawable.ic_profile).into(holder.profileImageView)
-        
     }
 
     override fun getItemCount(): Int {

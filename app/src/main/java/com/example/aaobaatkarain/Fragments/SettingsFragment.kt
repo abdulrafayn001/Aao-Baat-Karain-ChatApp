@@ -145,7 +145,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setSocialLinks() {
-        val builder = AlertDialog.Builder(context, R.style.MyAlertDialogStyle)
+        val builder = AlertDialog.Builder(context, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
 
         if(socialLink == "fb")
         {
