@@ -7,6 +7,82 @@
     tools:context=".ChatActivity"
     android:background="#e6e6e6"
     >
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_chat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.AaoBaatKarain.AppBarOverlay">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:popupTheme="@style/Theme.AaoBaatKarain.PopupOverlay"
+        >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_img_chat"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_profile"
+                />
+            <TextView
+                android:id="@+id/username_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:text="@string/username"
+                android:textStyle="bold"
+                />
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chat_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="611dp"
+        android:layout_above="@+id/button_layout"
+        android:layout_below="@+id/app_bar_chat"/>
+
+    <RelativeLayout
+        android:id="@+id/button_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:background="#fff"
+        >
+        <ImageView
+            android:id="@+id/attach_image_file"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_attach_file"
+            android:layout_alignParentStart="true"
+            android:padding="5dp"
+            />
+        <EditText
+            android:id="@+id/text_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:hint="@string/write_message_here"
+            android:layout_toEndOf="@id/attach_image_file"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            />
+
+        <ImageView
+            android:id="@+id/send_msg_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_action"
+            android:layout_alignParentEnd="true"
+
+            />
+    </RelativeLayout>
 
 
 </RelativeLayout>

@@ -19,4 +19,7 @@
     <string name="signup">SignUp</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="search_users_here">Search users here...</string>
+    <string name="write_message_here">write message here...</string>
+    <string name="testing_message">Testing Message</string>
+    <string name="seen">seen</string>
 </resources>

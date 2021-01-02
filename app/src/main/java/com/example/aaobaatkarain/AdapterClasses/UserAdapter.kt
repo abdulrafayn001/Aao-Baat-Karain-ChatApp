@@ -1,12 +1,15 @@
 package com.example.aaobaatkarain.AdapterClasses
 
 import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.aaobaatkarain.ChatActivity
 import com.example.aaobaatkarain.ModelClasses.Users
 import com.example.aaobaatkarain.R
 import com.squareup.picasso.Picasso
@@ -48,6 +51,24 @@ class UserAdapter (context: Context,users:List<Users>,isChatChecked:Boolean): Re
         val item = users[position]
         holder.userNameText.text= item.getUsername()
         Picasso.get().load(item.getProfile()).placeholder(R.drawable.ic_profile).into(holder.profileImageView)
+        holder.itemView.setOnClickListener {
+            val options= arrayOf<String>("Send Message","Visit Profile")
+            val builder: androidx.appcompat.app.AlertDialog.Builder =androidx.appcompat.app.AlertDialog.Builder(context)
+            builder.setItems(options,DialogInterface.OnClickListener {
+                dialog, which ->
+                if(which==0)
+                {
+                    val intent = Intent(context,ChatActivity::class.java)
+                    intent.putExtra("visit_id",item.getUid())
+                    context.startActivity(intent)
+                }
+                if(which==1)
+                {
+
+                }
+            })
+            builder.show()
+        }
     }
 
     override fun getItemCount(): Int {
