@@ -26,7 +26,7 @@ class Chat {
         this.messageId=messageId
     }
 
-    fun getSender():String{
+    fun getSender(): String {
         return this.sender
     }
 

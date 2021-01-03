@@ -6,6 +6,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.aaobaatkarain.AdapterClasses.ChatAdapter
+import com.example.aaobaatkarain.ModelClasses.Chat
 import com.example.aaobaatkarain.ModelClasses.Users
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
@@ -28,6 +32,9 @@ class ChatActivity : AppCompatActivity() {
     lateinit var userName:TextView
     lateinit var profileImage:ImageView
     lateinit var sendImage:ImageView
+    lateinit var recycler_view_chat:RecyclerView
+    var chatList:List<Chat>?=null
+    var chatAdapter:ChatAdapter?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,10 +44,17 @@ class ChatActivity : AppCompatActivity() {
         userName=findViewById(R.id.username_chat)
         profileImage=findViewById(R.id.profile_img_chat)
         sendImage=findViewById(R.id.attach_image_file)
-        intent=intent
-        userVisitId= intent.getStringExtra("visit_id").toString()
 
+        intent=intent
+        userVisitId= intent.getStringExtra("visit_id")!!
         firebaseUser= FirebaseAuth.getInstance().currentUser!!
+
+        recycler_view_chat=findViewById(R.id.chat_list_view)
+        recycler_view_chat.setHasFixedSize(true)
+        val linearLayoutManager=LinearLayoutManager(applicationContext)
+        linearLayoutManager.stackFromEnd=true
+        recycler_view_chat.layoutManager=linearLayoutManager
+
 
 
         val ref=FirebaseDatabase.getInstance()
@@ -53,6 +67,7 @@ class ChatActivity : AppCompatActivity() {
                 val user:Users?=snapshot.getValue(Users::class.java)
                 userName.text=user!!.getUsername()
                 Picasso.get().load(user.getProfile()).into(profileImage)
+                retrieveMessages(firebaseUser!!.uid,userVisitId,user.getProfile())
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -81,6 +96,36 @@ class ChatActivity : AppCompatActivity() {
             startActivityForResult(Intent.createChooser(intent,"Pick Image"),438)
         }
 
+    }
+
+    private fun retrieveMessages(senderId: String, receiverId: String, receiverImageUrl: String) {
+        chatList=ArrayList()
+        val ref = FirebaseDatabase.getInstance().reference.child("Chats")
+
+        ref.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                (chatList as ArrayList<Chat>).clear()
+                for( item in snapshot.children)
+                {
+                    val chat =item.getValue(Chat::class.java)
+                    //This condition is to make sure that the messages only belongs to sender and receiver
+                    if(chat!!.getReceiver() == senderId && chat.getSender() == receiverId || chat.getReceiver() == receiverId && chat.getSender().equals(senderId))
+                    {
+                        (chatList as ArrayList<Chat>).add(chat)
+                    }
+                    chatAdapter= ChatAdapter(this@ChatActivity,(chatList as ArrayList<Chat>),receiverImageUrl)
+                    recycler_view_chat.adapter=chatAdapter
+                }
+
+
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
     }
 
     private fun sendMessageToUser(senderId: String, receiverId: String, message: EditText?) {
@@ -171,7 +216,7 @@ class ChatActivity : AppCompatActivity() {
                     val url = downloadUrl.toString()
                     val messageHash = HashMap<String, Any?>()
                     messageHash["sender"] = firebaseUser!!.uid
-                    messageHash["message"] = "sent you an image"
+                    messageHash["message"] = "image sent"
                     messageHash["receiver"] = userVisitId
                     messageHash["isSeen"] = false
                     messageHash["url"] = url
