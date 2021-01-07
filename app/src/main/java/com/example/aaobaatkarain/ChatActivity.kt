@@ -15,10 +15,7 @@ import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
@@ -35,6 +32,8 @@ class ChatActivity : AppCompatActivity() {
     lateinit var recycler_view_chat:RecyclerView
     var chatList:List<Chat>?=null
     var chatAdapter:ChatAdapter?=null
+    var seenListner:ValueEventListener? = null
+    var ref:DatabaseReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,17 +56,17 @@ class ChatActivity : AppCompatActivity() {
 
 
 
-        val ref=FirebaseDatabase.getInstance()
+        ref=FirebaseDatabase.getInstance()
                 .reference
                 .child("Users")
                 .child(userVisitId)
 
-        ref.addValueEventListener(object :ValueEventListener{
+        ref!!.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val user:Users?=snapshot.getValue(Users::class.java)
                 userName.text=user!!.getUsername()
                 Picasso.get().load(user.getProfile()).into(profileImage)
-                retrieveMessages(firebaseUser!!.uid,userVisitId,user.getProfile())
+                retrieveMessages(firebaseUser.uid,userVisitId,user.getProfile())
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -77,7 +76,6 @@ class ChatActivity : AppCompatActivity() {
         })
 
         sendButton.setOnClickListener{
-
             if(message.text.toString()=="")
             {
                 Toast.makeText(this, "Message Field is Empty", Toast.LENGTH_SHORT).show()
@@ -95,6 +93,7 @@ class ChatActivity : AppCompatActivity() {
             intent.type="image/*"
             startActivityForResult(Intent.createChooser(intent,"Pick Image"),438)
         }
+        seenMsg(userVisitId)
 
     }
 
@@ -165,7 +164,7 @@ class ChatActivity : AppCompatActivity() {
                                 .child("ChatLists")
                                 .child(userVisitId)
                                 .child(firebaseUser.uid)
-                        chatsListRef.child("id").setValue(firebaseUser.uid)
+                        chatsListReceiverRef.child("id").setValue(firebaseUser.uid)
                     }
 
                     override fun onCancelled(error: DatabaseError) {
@@ -173,18 +172,17 @@ class ChatActivity : AppCompatActivity() {
                     }
                 })
 
-
-
-                //Implement the push notification using fcm
-                val ref=FirebaseDatabase.getInstance()
-                        .reference.child("Users")
-                        .child(firebaseUser!!.uid)
-
-
-
-
             }
         }
+
+
+        //Implement the push notification using fcm
+        val userRef=FirebaseDatabase.getInstance()
+            .reference.child("Users")
+            .child(firebaseUser.uid)
+
+
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -200,7 +198,7 @@ class ChatActivity : AppCompatActivity() {
             val messageId = ref.push().key
             val filePath = storageRef.child("$messageId.jpg")
 
-            val fileRef = storageRef?.child(System.currentTimeMillis().toString() + ".jpg")
+            val fileRef = storageRef.child(System.currentTimeMillis().toString() + ".jpg")
             val uploadTask: StorageTask<*>
             uploadTask = filePath.putFile(data.data!!)
             uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
@@ -215,7 +213,7 @@ class ChatActivity : AppCompatActivity() {
                     val downloadUrl = task.result
                     val url = downloadUrl.toString()
                     val messageHash = HashMap<String, Any?>()
-                    messageHash["sender"] = firebaseUser!!.uid
+                    messageHash["sender"] = firebaseUser.uid
                     messageHash["message"] = "image sent"
                     messageHash["receiver"] = userVisitId
                     messageHash["isSeen"] = false
@@ -223,9 +221,50 @@ class ChatActivity : AppCompatActivity() {
                     messageHash["messageId"] = messageId
 
                     ref.child("Chats").child(messageId!!).setValue(messageHash)
-                    progress.dismiss()
-                }
+                        .addOnCompleteListener{
+                            task->
+                            if(task.isSuccessful)
+                            {
+                                progress.dismiss()
+                            }
+                            else
+                            {
+                                Toast.makeText(this,"Connectivity issue",Toast.LENGTH_SHORT).show()
+                                progress.dismiss()
+                            }
+                        }
+                 }
             }
         }
+    }
+
+    private fun seenMsg(userId:String)
+    {
+        val ref = FirebaseDatabase.getInstance().reference.child("Chats")
+        seenListner = ref.addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(dataOnj in snapshot.children)
+                {
+                    val chat = dataOnj.getValue(Chat::class.java)
+                    if(chat!!.getReceiver().equals(firebaseUser.uid) && chat.getSender().equals(userId))
+                    {
+                        val map = HashMap<String,Any>()
+                        map["isSeen"] = true
+                        dataOnj.ref.updateChildren(map)
+                    }
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        })
+    }
+
+    override fun onPause()
+    {
+        super.onPause()
+        ref!!.removeEventListener(seenListner!!)
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 }
