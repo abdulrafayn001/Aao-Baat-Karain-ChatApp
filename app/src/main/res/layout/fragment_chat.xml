@@ -5,13 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.ChatFragment">
 
-
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Chat"
-        android:textSize="30sp"
-        android:gravity="center"
-        />
+        android:id="@+id/chatList"/>
 
 </RelativeLayout>
