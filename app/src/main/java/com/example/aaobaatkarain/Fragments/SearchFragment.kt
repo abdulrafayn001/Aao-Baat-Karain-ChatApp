@@ -29,11 +29,7 @@ class SearchFragment : Fragment() {
     private var searchEditText: EditText?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-
-    }
+        super.onCreate(savedInstanceState) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

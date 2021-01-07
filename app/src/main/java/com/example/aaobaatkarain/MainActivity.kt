@@ -115,9 +115,6 @@ class MainActivity : AppCompatActivity() {
                 gedit.putBoolean("LogSucess",false)
                 gedit.apply()
                 gedit.commit()
-                val intent = Intent(this,LoginActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
                 finish()
                 return true
             }
@@ -147,5 +144,10 @@ class MainActivity : AppCompatActivity() {
         override fun getPageTitle(position: Int): CharSequence? {
             return titles[position]
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 }

@@ -175,14 +175,6 @@ class ChatActivity : AppCompatActivity() {
             }
         }
 
-
-        //Implement the push notification using fcm
-        val userRef=FirebaseDatabase.getInstance()
-            .reference.child("Users")
-            .child(firebaseUser.uid)
-
-
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

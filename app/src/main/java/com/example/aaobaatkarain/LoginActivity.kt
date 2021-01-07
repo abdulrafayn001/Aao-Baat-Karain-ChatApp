@@ -37,12 +37,16 @@ class LoginActivity : AppCompatActivity() {
         val data: SharedPreferences = getSharedPreferences("LOG", MODE_PRIVATE)
         val gedit = data.edit()
 
+
         //If user is already logged in go to main activity
         if(userAuth.currentUser != null && data.getBoolean("LogSucess",false))
         {
             startActivity(Intent(this,MainActivity::class.java))
             finish()
         }
+
+        startActivity(Intent(this,SplahScreen::class.java))
+
 
         //If the user click on login button bellow action will take place
         Login_btn.setOnClickListener {
@@ -109,7 +113,4 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
-    fun userLogin(view: View) {
-
-    }
 }

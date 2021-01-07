@@ -22,4 +22,5 @@
     <string name="write_message_here">write message here...</string>
     <string name="testing_message">Testing Message</string>
     <string name="seen">seen</string>
+    <string name="splashscreen">SplashScreen</string>
 </resources>
