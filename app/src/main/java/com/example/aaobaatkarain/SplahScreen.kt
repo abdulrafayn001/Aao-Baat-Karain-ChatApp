@@ -25,16 +25,11 @@ class SplahScreen : AppCompatActivity() {
 
         val animation = AnimationUtils.loadAnimation(this, R.anim.move)
         animation.duration = 2000
-        val animation2 = AnimationUtils.loadAnimation(this, R.anim.move_opos)
-        animation2.duration = 2000
-
         TextSplash.startAnimation(animation)
-        Logo.startAnimation(animation2)
 
         Handler().postDelayed({
-            finish() }, 4000)
 
-
+            finish() }, 2000)
 
     }
 }
