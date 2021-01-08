@@ -1,9 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
     tools:context=".VisitUserProfileActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/cover_image_visit"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/cover" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image_visit"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="140dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/placeholder">
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/usernameProf_visit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/username"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/cv1"
+        android:layout_centerHorizontal="true"
+        />
+    <LinearLayout
+        android:id="@+id/layout_links"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cv1"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/overlayer"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="6dp">
+
+        <ImageView
+            android:id="@+id/fb_visit"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="3dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/facebook" />
+
+        <ImageView
+            android:id="@+id/insta_visit"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="3dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/instagram" />
+
+        <ImageView
+            android:id="@+id/web_visit"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginBottom="3dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/internet" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/send_msg_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_links"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        android:text="Send Message"
+        android:textAllCaps="false" />
+
+
+</RelativeLayout>

@@ -13,6 +13,7 @@ import com.example.aaobaatkarain.ChatActivity
 import com.example.aaobaatkarain.ModelClasses.Chat
 import com.example.aaobaatkarain.ModelClasses.Users
 import com.example.aaobaatkarain.R
+import com.example.aaobaatkarain.VisitUserProfileActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -99,7 +100,9 @@ class UserAdapter (context: Context,users:List<Users>,isChatChecked:Boolean): Re
                 }
                 if(which==1)
                 {
-
+                    val intent = Intent(context, VisitUserProfileActivity::class.java)
+                    intent.putExtra("visit_id",item.getUid())
+                    context.startActivity(intent)
                 }
             })
             builder.show()
