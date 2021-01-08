@@ -1,5 +1,4 @@
 package com.example.aaobaatkarain
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.animation.AnimationUtils
@@ -24,12 +23,12 @@ class SplahScreen : AppCompatActivity() {
         Logo = findViewById(R.id.logosplash)
 
         val animation = AnimationUtils.loadAnimation(this, R.anim.move)
-        animation.duration = 2000
-        TextSplash.startAnimation(animation)
+        animation.duration = 3000
+        Logo.startAnimation(animation)
 
         Handler().postDelayed({
 
-            finish() }, 2000)
+            finish() }, 4000)
 
     }
 }

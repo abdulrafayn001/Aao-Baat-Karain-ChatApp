@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
-        startActivity(Intent(this,SplahScreen::class.java))
+
 
 
         //If the user click on login button bellow action will take place

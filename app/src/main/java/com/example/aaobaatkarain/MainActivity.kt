@@ -1,5 +1,6 @@
 package com.example.aaobaatkarain
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
@@ -76,6 +77,8 @@ class MainActivity : AppCompatActivity() {
                 tabLayout.setupWithViewPager(viewPager)
             }
         })
+        startActivity(Intent(this,SplahScreen::class.java))
+
         //Displaying username and profile picture in main activity
         refUsers!!.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {

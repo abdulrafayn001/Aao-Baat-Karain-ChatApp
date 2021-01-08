@@ -8,13 +8,14 @@
     android:gravity="center"
     tools:ignore="UseCompoundDrawables"
     android:background="@color/colorPrimary">
+
     <ImageView
-        android:layout_width="wrap_content"
         android:id="@+id/logosplash"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_foreground"
+        android:layout_width="162dp"
+        android:layout_height="142dp"
+        android:layout_marginBottom="60dp"
         android:contentDescription="@string/splashscreen"
-        android:layout_marginBottom="60dp"/>
+        android:src="@drawable/chat" />
     <TextView
         android:id="@+id/nameSplash"
         android:layout_width="match_parent"
