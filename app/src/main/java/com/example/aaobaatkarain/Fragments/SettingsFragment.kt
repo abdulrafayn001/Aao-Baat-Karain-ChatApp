@@ -147,32 +147,30 @@ class SettingsFragment : Fragment() {
     private fun setSocialLinks() {
         val builder = AlertDialog.Builder(context, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
 
-        if(socialLink == "fb")
-        {
-            builder.setTitle("Facebook User Name")
-        }
-        else if(socialLink == "insta")
-        {
-            builder.setTitle("Instagram User Name")
-        }
-        else if(socialLink == "web")
-        {
-            builder.setTitle("Website URL")
+        when (socialLink) {
+            "fb" -> {
+                builder.setTitle("Facebook User Name")
+            }
+            "insta" -> {
+                builder.setTitle("Instagram User Name")
+            }
+            "web" -> {
+                builder.setTitle("Website URL")
+            }
         }
 
         val inputField = EditText(context)
 
-        if(socialLink == "fb")
-        {
-            inputField.hint = "   Username of Facebook"
-        }
-        else if(socialLink == "insta")
-        {
-            inputField.hint = "   Username of Instagram"
-        }
-        else if(socialLink == "web")
-        {
-            inputField.hint = "   e.g, www.google.com"
+        when (socialLink) {
+            "fb" -> {
+                inputField.hint = "   Username of Facebook"
+            }
+            "insta" -> {
+                inputField.hint = "   Username of Instagram"
+            }
+            "web" -> {
+                inputField.hint = "   e.g, www.google.com"
+            }
         }
         builder.setView(inputField)
         builder.setPositiveButton("Save Changes"){ dialog, which ->
@@ -202,16 +200,18 @@ class SettingsFragment : Fragment() {
 
     private fun saveSocialInDatabase(input: String) {
         val Links = HashMap<String, Any>()
-        when(socialLink)
+        if(input!="")
         {
-            "fb" -> {
-                Links["facebook"] = "https://www.facebook.com/$input"
-            }
-            "insta" -> {
-                Links["instagram"] = "https://www.instagram.com/$input"
-            }
-            "web" -> {
-                Links["website"] = "https://$input"
+            when(socialLink) {
+                "fb" -> {
+                    Links["facebook"] = "https://www.facebook.com/$input"
+                }
+                "insta" -> {
+                    Links["instagram"] = "https://www.instagram.com/$input"
+                }
+                "web" -> {
+                    Links["website"] = "https://$input"
+                }
             }
         }
         userRef!!.updateChildren(Links).addOnCompleteListener { task->
