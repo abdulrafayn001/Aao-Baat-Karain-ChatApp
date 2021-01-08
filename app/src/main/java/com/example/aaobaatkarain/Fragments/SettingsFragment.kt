@@ -76,7 +76,7 @@ class SettingsFragment : Fragment() {
         })
         // cover picture changer
         view.findViewById<ImageView>(R.id.profile_image).setOnClickListener {
-            val builder = AlertDialog.Builder(context)
+            val builder = AlertDialog.Builder(context,R.style.MyAlertDialogStyle)
             builder.setTitle("Change Profile Picture")
             builder.setMessage("Are You Sure You Want to Change Your Profile Picture ?")
             builder.setPositiveButton("YES"){ dialog, which ->
@@ -89,7 +89,7 @@ class SettingsFragment : Fragment() {
         }
         // Profile picture changer
         view.findViewById<ImageView>(R.id.cover_image).setOnClickListener {
-            val builder = AlertDialog.Builder(context)
+            val builder = AlertDialog.Builder(context,R.style.MyAlertDialogStyle)
             builder.setTitle("Change Cover Picture")
             builder.setMessage("Are You Sure You Want to Change Your Cover Picture ?")
             builder.setPositiveButton("YES"){ dialog, which ->
@@ -102,7 +102,7 @@ class SettingsFragment : Fragment() {
         }
         // Facebook links
         view.findViewById<ImageView>(R.id.set_fb).setOnClickListener {
-            val builder = AlertDialog.Builder(context)
+            val builder = AlertDialog.Builder(context,R.style.MyAlertDialogStyle)
             builder.setTitle("Change Facebook link")
             builder.setMessage("Are You Sure You Want to Change Your Facebook link?")
             builder.setPositiveButton("YES"){ dialog, which ->
@@ -115,7 +115,7 @@ class SettingsFragment : Fragment() {
         }
         // Instagram links
         view.findViewById<ImageView>(R.id.set_insta).setOnClickListener {
-            val builder = AlertDialog.Builder(context)
+            val builder = AlertDialog.Builder(context,R.style.MyAlertDialogStyle)
             builder.setTitle("Change Instagram Link")
             builder.setMessage("Are You Sure You Want to Change Your instagram link?")
             builder.setPositiveButton("YES"){ dialog, which ->
@@ -129,7 +129,7 @@ class SettingsFragment : Fragment() {
         }
         // Website links
         view.findViewById<ImageView>(R.id.set_web).setOnClickListener {
-            val builder = AlertDialog.Builder(context)
+            val builder = AlertDialog.Builder(context,R.style.MyAlertDialogStyle)
             builder.setTitle("Change Website Link")
             builder.setMessage("Are You Sure You Want to Change Your Website link?")
             builder.setPositiveButton("YES"){ dialog, which ->
@@ -145,7 +145,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setSocialLinks() {
-        val builder = AlertDialog.Builder(context, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+        val builder = AlertDialog.Builder(context, R.style.MyAlertDialogStyle)
 
         when (socialLink) {
             "fb" -> {

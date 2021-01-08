@@ -59,7 +59,7 @@ class ChatAdapter (var mContext: Context, var mChatList:List<Chat>, var imageURL
                             "Delete Image",
                             "Cancel"
                     )
-                    var builder:AlertDialog.Builder = AlertDialog.Builder(holder.itemView.context)
+                    var builder:AlertDialog.Builder = AlertDialog.Builder(holder.itemView.context,R.style.MyAlertDialogStyle)
                     builder.setTitle("Choose ?")
                     builder.setItems(options,DialogInterface.OnClickListener{
                         dialog, which ->
@@ -90,7 +90,7 @@ class ChatAdapter (var mContext: Context, var mChatList:List<Chat>, var imageURL
                                 "View Full Image",
                                 "Cancel"
                         )
-                        var builder: AlertDialog.Builder = AlertDialog.Builder(holder.itemView.context)
+                        var builder: AlertDialog.Builder = AlertDialog.Builder(holder.itemView.context,R.style.MyAlertDialogStyle)
                         builder.setTitle("Choose ?")
                         builder.setItems(options, DialogInterface.OnClickListener { dialog, which ->
                             if (which == 0) {
@@ -113,7 +113,7 @@ class ChatAdapter (var mContext: Context, var mChatList:List<Chat>, var imageURL
                             "Delete Message",
                             "Cancel"
                     )
-                    val builder: AlertDialog.Builder = AlertDialog.Builder(holder.itemView.context)
+                    val builder: AlertDialog.Builder = AlertDialog.Builder(holder.itemView.context,R.style.MyAlertDialogStyle)
                     builder.setTitle("Choose ?")
                     builder.setItems(options, DialogInterface.OnClickListener { dialog, which ->
                         if (which == 0)

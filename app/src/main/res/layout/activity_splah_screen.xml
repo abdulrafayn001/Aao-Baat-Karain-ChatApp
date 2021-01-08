@@ -6,7 +6,8 @@
     tools:context=".SplahScreen"
     android:orientation="vertical"
     android:gravity="center"
-    tools:ignore="UseCompoundDrawables">
+    tools:ignore="UseCompoundDrawables"
+    android:background="@color/colorPrimary">
     <ImageView
         android:layout_width="wrap_content"
         android:id="@+id/logosplash"
@@ -18,6 +19,7 @@
         android:id="@+id/nameSplash"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorBasic"
         android:text="@string/app_name_urdu"
         android:textStyle="bold"
         android:textSize="34sp"

@@ -5,17 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".VisitUserProfileActivity">
+    tools:context=".VisitUserProfileActivity"
+    android:background="@color/colorPrimary"
+    >
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp">
+        android:layout_margin="33dp"
+        >
 
         <RelativeLayout
+            android:background="@color/colorPrimary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="30dp">
 
             <ImageView
                 android:id="@+id/cover_image_visit"
@@ -42,9 +47,11 @@
         android:id="@+id/usernameProf_visit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/gotham"
         android:text="@string/username"
+        android:textColor="@color/colorBasic"
         android:textSize="35sp"
         android:textStyle="bold"
         android:layout_below="@+id/cv1"
@@ -54,9 +61,9 @@
         android:id="@+id/layout_links"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cv1"
+        android:layout_below="@+id/usernameProf_visit"
+        android:layout_marginTop="30dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="116dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/overlayer"
@@ -101,13 +108,15 @@
 
     <Button
         android:id="@+id/send_msg_btn"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorPrimary"
         android:layout_below="@+id/layout_links"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorPrimary"
-        android:text="Send Message"
-        android:textAllCaps="false" />
+        android:text="@string/send_message"
+        android:textAllCaps="false"
+
+        />
 
 
 </RelativeLayout>

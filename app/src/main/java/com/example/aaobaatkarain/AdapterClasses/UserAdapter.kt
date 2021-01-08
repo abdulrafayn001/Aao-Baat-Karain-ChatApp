@@ -89,7 +89,7 @@ class UserAdapter (context: Context,users:List<Users>,isChatChecked:Boolean): Re
         }
         holder.itemView.setOnClickListener {
             val options= arrayOf<String>("Send Message","Visit Profile")
-            val builder: androidx.appcompat.app.AlertDialog.Builder =androidx.appcompat.app.AlertDialog.Builder(context)
+            val builder: androidx.appcompat.app.AlertDialog.Builder =androidx.appcompat.app.AlertDialog.Builder(context,R.style.MyAlertDialogStyle)
             builder.setItems(options,DialogInterface.OnClickListener {
                 dialog, which ->
                 if(which==0)
