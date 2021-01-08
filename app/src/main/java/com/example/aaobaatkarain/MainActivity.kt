@@ -1,6 +1,5 @@
 package com.example.aaobaatkarain
 
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
@@ -150,4 +149,23 @@ class MainActivity : AppCompatActivity() {
         super.onBackPressed()
         finish()
     }
+    private fun updateStatus(status:String)
+    {
+        val ref=FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
+        val hashMap=HashMap<String,Any>()
+        hashMap["status"]=status
+        ref!!.updateChildren(hashMap)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateStatus("online")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        updateStatus("offline")
+    }
+
+
 }

@@ -253,10 +253,26 @@ class ChatActivity : AppCompatActivity() {
     override fun onPause()
     {
         super.onPause()
+        updateStatus("offline")
         ref!!.removeEventListener(seenListner!!)
     }
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
     }
+
+    private fun updateStatus(status:String)
+    {
+        val ref=FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
+        val hashMap=HashMap<String,Any>()
+        hashMap["status"]=status
+        ref!!.updateChildren(hashMap)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateStatus("online")
+    }
+
+
 }

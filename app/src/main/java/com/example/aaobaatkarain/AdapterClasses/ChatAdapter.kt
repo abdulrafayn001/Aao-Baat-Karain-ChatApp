@@ -10,7 +10,6 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aaobaatkarain.ModelClasses.Chat
 import com.example.aaobaatkarain.R
@@ -125,6 +124,10 @@ class ChatAdapter (var mContext: Context, var mChatList:List<Chat>, var imageURL
                     })
                     builder.show()
                 }
+            }
+            else
+            {
+                holder.show_text_Message!!.text=chat.getMessage()
             }
         }
 
