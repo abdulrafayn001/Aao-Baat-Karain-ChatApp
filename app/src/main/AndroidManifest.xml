@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AaoBaatKarain.NoActionBar">
-        <activity android:name=".ViewFullImage"></activity>
+        <activity android:name=".VisitUserProfileActivity"></activity>
+        <activity android:name=".ViewFullImage" />
         <activity android:name=".SplahScreen" />
         <activity android:name=".ChatActivity" />
         <activity
