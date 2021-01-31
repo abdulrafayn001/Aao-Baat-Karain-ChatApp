@@ -117,6 +117,8 @@ class MainActivity : AppCompatActivity() {
                 gedit.putBoolean("LogSucess",false)
                 gedit.apply()
                 gedit.commit()
+//                var intent=Intent(this@MainActivity, LoginActivity::class.java)
+//                startActivity(intent)
                 finish()
                 return true
             }

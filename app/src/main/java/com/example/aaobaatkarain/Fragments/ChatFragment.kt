@@ -80,6 +80,10 @@ class ChatFragment : Fragment() {
                         }
                     }
                 }
+                for(i in mUsers!!)
+                {
+                    println("<<<<<<<<<<<<<<<<<<<<<< "+i+" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+                }
                 userAdapter = UserAdapter(context!!,(mUsers as ArrayList<Users>),true)
                 recycView.adapter = userAdapter
             }

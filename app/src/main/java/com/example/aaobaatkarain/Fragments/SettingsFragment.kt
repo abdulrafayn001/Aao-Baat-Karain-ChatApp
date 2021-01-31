@@ -246,7 +246,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun uploadImageFirebase() {
-        val progress = ProgressDialog(context)
+        val progress = ProgressDialog(context,R.style.MyAlertDialogStyle)
         progress.setTitle("Uploading Image")
         progress.setTitle("Uploading image please wait!")
         progress.show()

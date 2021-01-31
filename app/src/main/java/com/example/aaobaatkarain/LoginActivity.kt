@@ -67,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
                 //if both email and password input fields are not empty
                 else -> {
                     //Loading Screen
-                    val waitingBar: ProgressDialog = ProgressDialog(this)
+                    val waitingBar: ProgressDialog = ProgressDialog(this,R.style.MyAlertDialogStyle)
                     waitingBar.setMessage("Signing in Please Wait!")
                     waitingBar.setProgressStyle(ProgressDialog.STYLE_SPINNER)
                     waitingBar.setTitle("Sign In")

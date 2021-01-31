@@ -79,7 +79,7 @@ class RegisterActivity : AppCompatActivity() {
             if(validateEmail(email) && validatePassword(pswd))
             {
                 // Loading screen while register
-                val waitingBar: ProgressDialog = ProgressDialog(this)
+                val waitingBar: ProgressDialog = ProgressDialog(this,R.style.MyAlertDialogStyle)
                 waitingBar.setMessage("Registering your account. Please Wait!")
                 waitingBar.setProgressStyle(ProgressDialog.STYLE_SPINNER)
                 waitingBar.setTitle("Register")
