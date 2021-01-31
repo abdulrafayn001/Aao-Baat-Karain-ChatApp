@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
+import kotlin.system.exitProcess
 
 
 class MainActivity : AppCompatActivity() {
@@ -119,7 +120,8 @@ class MainActivity : AppCompatActivity() {
                 gedit.commit()
 //                var intent=Intent(this@MainActivity, LoginActivity::class.java)
 //                startActivity(intent)
-                finish()
+//                finish()
+                exitProcess(-1)
                 return true
             }
         }

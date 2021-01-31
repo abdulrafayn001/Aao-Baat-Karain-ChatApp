@@ -84,10 +84,6 @@ class SearchFragment : Fragment() {
                             (mUsers as ArrayList<Users>).add(usr)
                         }
                     }
-                    for(i in mUsers!!)
-                    {
-                        println("======================>"+i)
-                    }
                     recyclerView!!.adapter = UserAdapter(context!!, mUsers!!,false)
 
                     // Use this setting to improve performance if you know that changes
